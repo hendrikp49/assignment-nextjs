@@ -3,6 +3,7 @@ import { deleteCookie, getCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Navbar from "./components/Navbar";
 
 export async function getServerSideProps(context) {
   try {
@@ -49,16 +50,15 @@ const HomePage = (props) => {
   // console.log(products);
   const router = useRouter();
 
-  const handleLogout = () => {
-    deleteCookie("token");
-    router.push("/auth/login");
-  };
-
   return (
     <div>
-      <div className="text-white bg-[url('/img/repeat.webp')] bg-origin-content">
-        <h1 className="text-5xl font-bold">Welcome!</h1>
-        <button onClick={handleLogout}>Logout</button>
+      <div className="text-white bg-[url('/img/repeat.webp')] bg-origin-content py-5">
+        <h1 className="mb-10 text-5xl font-bold text-center">Welcome!</h1>
+        <Navbar>
+          <div className="flex col-span-2 gap-5 px-5 py-1 rounded-lg w-fit bg-slate-700">
+            <span className=" text-slate-300">List Food</span>
+          </div>
+        </Navbar>
         <div className="grid grid-cols-1 gap-4 mx-auto duration-200 ease-in-out sm:gap-7 max-w-60 lg:grid-cols-4 md:grid-cols-3 sm:max-w-lg md:max-w-3xl lg:max-w-5xl sm:grid-cols-2">
           {products.map((product) => (
             <div

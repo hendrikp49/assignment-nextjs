@@ -1,6 +1,8 @@
 import { redirect } from "next/dist/server/api-utils";
 import { getCookie } from "cookies-next";
 import axios from "axios";
+import Navbar from "./components/Navbar";
+import Link from "next/link";
 
 export async function getServerSideProps(context) {
   try {
@@ -25,7 +27,7 @@ export async function getServerSideProps(context) {
       `https://api-bootcamp.do.dibimbing.id/api/v1/foods/${context.params.id}`,
       config
     );
-    console.log(res.data.data);
+    // console.log(res.data.data);
     return {
       props: {
         food: res.data.data,
@@ -80,7 +82,16 @@ const DetailFoodPage = (props) => {
   // console.log(food);
   return (
     <div>
-      <div className="flex items-center justify-center h-screen text-white bg-[url('/img/repeat.webp')] bg-origin-content">
+      <div className="flex flex-col items-center justify-center h-screen text-white bg-[url('/img/repeat.webp')] bg-origin-content">
+        <Navbar>
+          <div className="flex col-span-2 gap-2 px-5 py-1 rounded-lg w-fit bg-slate-700 text-slate-400">
+            <Link href="/">
+              <span className="cursor-pointer hover:text-white">List Food</span>
+            </Link>
+            <span>/</span>
+            <span className="">Detail Food</span>
+          </div>
+        </Navbar>
         <div className="flex flex-col w-full max-w-xs gap-2 pb-3 overflow-hidden border md:min-h-72 md:pb-0 md:max-w-lg md:flex-row rounded-xl">
           <div className="">
             <img
